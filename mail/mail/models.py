@@ -3,7 +3,8 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    words = models.CharField(max_length=200)
+    
 
 
 class Email(models.Model):

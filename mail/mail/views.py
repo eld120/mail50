@@ -99,7 +99,7 @@ def mailbox(request, mailbox):
 @csrf_exempt
 @login_required
 def email(request, email_id):
-
+    print()
     # Query for requested email
     try:
         email = Email.objects.get(user=request.user, pk=email_id)
