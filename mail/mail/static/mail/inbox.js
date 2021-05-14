@@ -24,12 +24,10 @@ function compose_email() {
 
 function load_mailbox(mailbox) {
   
-  function get_mailbox(mailbox) {
-    fetch(('emails/' + mailbox)).then(emails => emails.json());
-  }
+  
   if (mailbox == 'inbox') {
     get_mailbox(mailbox)
-    
+
   }
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
@@ -41,7 +39,7 @@ function load_mailbox(mailbox) {
 
 
 function sendMail() {
-  let recip = document.querySelector('#from').value;
+  let recip = document.querySelector('#compose-recipients').value;
   let subj = document.querySelector('#compose-subject').value;
   let bod = document.querySelector('#compose-body').value;
   fetch('/emails', {
@@ -55,7 +53,16 @@ function sendMail() {
     
     
     
-  console.log(recip);
-  console.log(subj);
-  console.log(bod);
+  
+}
+
+
+function get_mailbox(mailbox) {
+  fetch(('emails/' + mailbox)).then(emails => emails.json())
+    .then(result => document.querySelector('#emails-view')
+    .appendChild(document.createTextNode(result)));
+}
+
+function get_inbox() {
+  
 }
