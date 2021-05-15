@@ -27,6 +27,7 @@ function load_mailbox(mailbox) {
   
   if (mailbox == 'inbox') {
     get_mailbox(mailbox)
+    //test(mailbox)
 
   }
   // Show the mailbox and hide other views
@@ -39,9 +40,9 @@ function load_mailbox(mailbox) {
 
 
 function sendMail() {
-  let recip = document.querySelector('#compose-recipients').value;
-  let subj = document.querySelector('#compose-subject').value;
-  let bod = document.querySelector('#compose-body').value;
+  const recip = document.querySelector('#compose-recipients').value;
+  const subj = document.querySelector('#compose-subject').value;
+  const bod = document.querySelector('#compose-body').value;
   fetch('/emails', {
     method: 'POST',
     body: JSON.stringify({
@@ -49,7 +50,7 @@ function sendMail() {
       subject: subj,
       body: bod
     })
-  }).then(response => response.json()).then(result => console.log(result));
+  }).then(response => response.json());
     
     
     
@@ -58,11 +59,23 @@ function sendMail() {
 
 
 function get_mailbox(mailbox) {
-  fetch(('emails/' + mailbox)).then(emails => emails.json())
-    .then(result => document.querySelector('#emails-view')
-    .appendChild(document.createTextNode(result)));
+  fetch(('emails/' + mailbox))
+    .then(emails => emails.json())
+    .then(result => obj = result)
+  .then(() => console.log(obj))
+  
+    
+       
 }
 
 function get_inbox() {
+  
+}
+
+
+//Test function to print API result to console
+function test(mailbox) {
+  fetch(('emails/' + mailbox)).then(emails => emails.json())
+    .then(result => console.log(result));
   
 }
