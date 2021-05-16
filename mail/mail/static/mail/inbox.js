@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+
+
+document.addEventListener('DOMContentLoaded', function () {
 
   // Use buttons to toggle between views
   document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
@@ -26,8 +28,8 @@ function load_mailbox(mailbox) {
   
   
   if (mailbox == 'inbox') {
-    get_mailbox(mailbox)
-    //test(mailbox)
+    display_mailbox(mailbox)
+    test(mailbox)
 
   }
   // Show the mailbox and hide other views
@@ -58,15 +60,57 @@ function sendMail() {
 }
 
 
-function get_mailbox(mailbox) {
+function display_mailbox(mailbox) {
   fetch(('emails/' + mailbox))
     .then(emails => emails.json())
-    .then(result => obj = result)
-  .then(() => console.log(obj))
+    .then(result => result = result)
+      
+       for (i = 0; i < result.length; i++){
+      
+        const p = document.createElement('p');
+        const span = document.createElement('span');
+        const span2 = document.createElement('span');
+        const target = document.querySelector('#target');
+        const p2 = document.createElement('p');
+        const p3 = document.createElement('p');
+        const p4 = document.createElement('p');
+        
+        p.setAttribute('id', `firstline${i}`);
+        span.setAttribute('id', `sender${i}`);
+        span2.setAttribute('id', `timestamp${i}`);
+        p2.setAttribute("id", `recipients${i}`);
+        p3.setAttribute("id", `subject${i}`);
+        p4.setAttribute("id", `body${i}`);
+
+        target.append(p);
+        p.append(span);
+        p.append(span2);
+        target.append(p2);
+        target.append(p3);
+        target.append(p4);
+      
+        
+      document.querySelector(`#sender${i}`).innerHTML = `${result['sender']}`;
+      document.querySelector(`#timestamp${i}`).innerHTML = `${result['timestamp']}`;
+      document.querySelector(`#recipients${i}`).innerHTML = `${result['recipients']}`;
+      document.querySelector(`#subject${i}`).innerHTML = `${result['subject']}`;
+      document.querySelector(`#body${i}`).innerHTML = `${result['body']}`;
+      
+      }
+    
+  
+
+  
+
+
+
+  //       return  ''
+    
+  }
   
     
        
-}
+
 
 function get_inbox() {
   
