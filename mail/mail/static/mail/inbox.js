@@ -29,7 +29,7 @@ function load_mailbox(mailbox) {
   
   if (mailbox == 'inbox') {
     display_mailbox(mailbox)
-    test(mailbox)
+    //test(mailbox)
 
   }
   // Show the mailbox and hide other views
@@ -53,67 +53,27 @@ function sendMail() {
       body: bod
     })
   }).then(response => response.json());
-    
-    
-    
-  
 }
 
 
 function display_mailbox(mailbox) {
-  fetch(('emails/' + mailbox))
+ fetch(('emails/' + mailbox))
     .then(emails => emails.json())
-    .then(result => result = result)
-      
-       for (i = 0; i < result.length; i++){
-      
-        const p = document.createElement('p');
-        const span = document.createElement('span');
-        const span2 = document.createElement('span');
-        const target = document.querySelector('#target');
-        const p2 = document.createElement('p');
-        const p3 = document.createElement('p');
-        const p4 = document.createElement('p');
-        
-        p.setAttribute('id', `firstline${i}`);
-        span.setAttribute('id', `sender${i}`);
-        span2.setAttribute('id', `timestamp${i}`);
-        p2.setAttribute("id", `recipients${i}`);
-        p3.setAttribute("id", `subject${i}`);
-        p4.setAttribute("id", `body${i}`);
-
-        target.append(p);
-        p.append(span);
-        p.append(span2);
-        target.append(p2);
-        target.append(p3);
-        target.append(p4);
-      
-        
-      document.querySelector(`#sender${i}`).innerHTML = `${result['sender']}`;
-      document.querySelector(`#timestamp${i}`).innerHTML = `${result['timestamp']}`;
-      document.querySelector(`#recipients${i}`).innerHTML = `${result['recipients']}`;
-      document.querySelector(`#subject${i}`).innerHTML = `${result['subject']}`;
-      document.querySelector(`#body${i}`).innerHTML = `${result['body']}`;
-      
-      }
-    
+    .then(result => get_inbox(result))
+    }
   
-
   
-
-
-
-  //       return  ''
-    
-  }
+function get_inbox(result) {
+  const target = document.querySelector('#target');
+  target.innerHTML = '';
   
-    
-       
-
-
-function get_inbox() {
-  
+  for (i = 0; i < result.length; i++){
+    const inbox = `<p><span>${result[i]['sender']}</span><span>${result[i]['timestamp']}</span></p>
+            <p>${result[i]['recipients']}</p>
+            <p>${result[i]['subject']}</p>
+            <p>${result[i]['body']}</p>`
+    target.append(inbox)
+    }
 }
 
 
