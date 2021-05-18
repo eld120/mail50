@@ -68,11 +68,37 @@ function get_inbox(result) {
   target.innerHTML = '';
   
   for (i = 0; i < result.length; i++){
-    const inbox = `<p><span>${result[i]['sender']}</span><span>${result[i]['timestamp']}</span></p>
-            <p>${result[i]['recipients']}</p>
-            <p>${result[i]['subject']}</p>
-            <p>${result[i]['body']}</p>`
-    target.append(inbox)
+    
+    const para1 = document.createElement('p');
+    para1.setAttribute('id', `para1${i}`);
+    const span1 = document.createElement('span');
+    span1.setAttribute('id', `span1${i}`);
+    const span2 = document.createElement('span');
+    span2.setAttribute('id', `span2${i}`);
+    const para2 = document.createElement('p');
+    para2.setAttribute('id', `para2${i}`);
+    const para3 = document.createElement('p');
+    para3.setAttribute('id', `para3${i}`);
+    const para4 = document.createElement('p');
+    const hr = document.createElement('hr');
+    
+    para4.setAttribute('id', `para4${i}`);
+    target.append(para1, span2, para2, para3, hr, para4);
+    para1.append(span1);
+
+    const sender = `From: ${result[i]['sender']}`;
+    const timestamp = `Date: ${result[i]['timestamp']}`;
+    const recipients = `To: ${result[i]['recipients']}`;
+    const subject = `Subject: ${result[i]['subject']}`;
+    const body = `${result[i]['body']}`;
+
+    document.querySelector(`#span1${i}`).innerHTML = sender;
+    document.querySelector(`#span2${i}`).innerHTML = timestamp;
+    document.querySelector(`#para2${i}`).innerHTML = recipients;
+    document.querySelector(`#para3${i}`).innerHTML = subject;
+    document.querySelector(`#para4${i}`).innerHTML = body;
+
+    
     }
 }
 
