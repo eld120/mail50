@@ -1,0 +1,16 @@
+@use '_reset.scss';
+
+textarea {
+    min-height: 400px;
+}
+
+.minidiv{
+    border: black 1px solid;
+    padding: 2rem;
+}
+.minidiv > p{
+    display: flex;
+}
+.span{
+    margin-left: auto;
+}
